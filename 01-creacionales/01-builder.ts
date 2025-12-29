@@ -63,12 +63,6 @@ class ComputerBuilder {
 }
 
 function main() {
-    // const gamingPC = new ComputerBuilder()
-    //     .setCPU('Intel Core i9')
-    //     .setRAM('32GB')
-    //     .setStorage('1TB SSD')
-    //     .setGPU('NVIDIA RTX 4090')
-    //     .build();
     const basicComputer:Computer = new ComputerBuilder()
         .setCPU('Intel Core i3-12100')
         .setRAM('4GB')
