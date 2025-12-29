@@ -21,13 +21,19 @@ interface Hamburger {
 
 class CheeseBurger implements Hamburger {
   prepare(): void {
-    console.log(`${COLORS.blue}Preparing Cheese Burger`);
+    console.log(`%cPreparing Cheese Burger`, COLORS.orange);
   }
 }
 
 class BeefBurger implements Hamburger {
     prepare(): void {
-        console.log(`${COLORS.green}Preparing Beef Burger`);
+        console.log(`%cPreparing Beef Burger`, COLORS.red);
+    }
+}
+
+class BeaconBurger implements Hamburger {
+    prepare(): void {
+        console.log(`%cPreparing Beacon Burger`, COLORS.blue);
     }
 }
 
@@ -45,3 +51,39 @@ class BeefRestaurant extends Restaurant {
         return new BeefBurger();
     }
 }
+
+class CheeseRestaurant extends Restaurant {
+    override createHamburger(): Hamburger {
+        return new CheeseBurger();
+    }
+}
+
+class BeaconRestaurant extends Restaurant {
+    override createHamburger(): Hamburger {
+        return new BeaconBurger();
+    }
+}
+
+function main() {
+    let restaurant: Restaurant;
+    const orderType = prompt("Enter order type (beef/cheese/beacon):");
+
+    switch(orderType) {
+        case 'beef':
+            restaurant = new BeefRestaurant();
+            break;
+        case 'cheese':
+            restaurant = new CheeseRestaurant();
+            break;
+        case 'beacon':
+            restaurant = new BeaconRestaurant();
+            break;
+        default:
+            throw new Error("Invalid order type");
+            return;
+    }
+
+    restaurant.orderHamburger();
+}
+
+main();
