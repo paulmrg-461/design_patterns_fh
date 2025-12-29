@@ -13,6 +13,8 @@
  * https://refactoring.guru/es/design-patterns/builder
  */
 
+import { COLORS } from "../helpers/colors.ts";
+
 class Computer {
     public cpu: string = 'cpu - not defined';
     public ram: string = 'ram - not defined';
@@ -59,3 +61,33 @@ class ComputerBuilder {
         return this.computer;
     }
 }
+
+function main() {
+    // const gamingPC = new ComputerBuilder()
+    //     .setCPU('Intel Core i9')
+    //     .setRAM('32GB')
+    //     .setStorage('1TB SSD')
+    //     .setGPU('NVIDIA RTX 4090')
+    //     .build();
+    const basicComputer:Computer = new ComputerBuilder()
+        .setCPU('Intel Core i3-12100')
+        .setRAM('4GB')
+        .setStorage('256GB SSD')
+        .build();
+
+    console.log('%cBasic Computer Configuration:', COLORS.blue);
+    basicComputer.displayConfiguration();
+
+    // console.log('%cGaming PC Configuration:', COLORS.green);
+    const gamingPC:Computer = new ComputerBuilder()
+        .setCPU('Ryzen 9 9950X 3D')
+        .setRAM('64GB DDR5')
+        .setStorage('2TB M.2 NVMe SSD')
+        .setGPU('NVIDIA RTX 5080Ti')
+        .build();
+
+    console.log('%cGaming PC Configuration:', COLORS.green);
+    gamingPC.displayConfiguration();
+}
+
+main();
