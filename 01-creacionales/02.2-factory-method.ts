@@ -90,7 +90,7 @@ function main() {
 
   const reportType = prompt(
     `¿Qué tipo de reporte deseas? (sales/inventory/benchmark):`
-  ).toLowerCase();
+  )?.toLowerCase();
 
   switch(reportType){
     case 'sales':
