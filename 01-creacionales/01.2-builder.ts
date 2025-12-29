@@ -92,7 +92,7 @@ class QueryBuilder {
 }
 
 function main() {
-  const usersQuery = new QueryBuilder('users')
+  const usersQuery = new QueryBuilder('buses')
     .select('id', 'name', 'email')
     .where('age > 18')
     .where("country = 'Colombia'") // Esto debe de hacer una condición AND

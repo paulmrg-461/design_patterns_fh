@@ -12,3 +12,36 @@
  * https://refactoring.guru/es/design-patterns/factory-method
  *
  */
+
+import { COLORS } from "../helpers/colors.ts";
+
+interface Hamburger {
+    prepare(): void;
+}
+
+class CheeseBurger implements Hamburger {
+  prepare(): void {
+    console.log(`${COLORS.blue}Preparing Cheese Burger`);
+  }
+}
+
+class BeefBurger implements Hamburger {
+    prepare(): void {
+        console.log(`${COLORS.green}Preparing Beef Burger`);
+    }
+}
+
+abstract class Restaurant {
+    abstract createHamburger() : Hamburger;
+
+    orderHamburger():void {
+        const hamburger = this.createHamburger();
+        hamburger.prepare();
+    }
+}
+
+class BeefRestaurant extends Restaurant {
+    override createHamburger(): Hamburger {
+        return new BeefBurger();
+    }
+}
