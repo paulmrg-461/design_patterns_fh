@@ -35,19 +35,27 @@ interface Report {
 // Implementar SalesReport e InventoryReport
 
 class SalesReport implements Report {
-  // TODO: implementar el método e imprimir en consola:
-  // 'Generando reporte de ventas...'
+  generate(): void {
+    console.log(`%cGenerating sales report...`, COLORS.orange);
+  }
 }
 
 class InventoryReport implements Report {
-  // TODO: implementar el método e imprimir en consola:
-  // 'Generando reporte de inventario...'
+  generate(): void {
+    console.log(`%cGenerating inventory report...`, COLORS.blue);
+  }
+}
+
+class BenchmarkReport implements Report {
+  generate(): void {
+    console.log(`%cGenerating benchmark report...`, COLORS.green);
+  }
 }
 
 // 3. Clase Base ReportFactory con el Método Factory
 
 abstract class ReportFactory {
-  abstract createReport(): Report;
+  protected abstract createReport(): Report;
 
   generateReport(): void {
     const report = this.createReport();
@@ -58,14 +66,20 @@ abstract class ReportFactory {
 // 4. Clases Concretas de Fábricas de Reportes
 
 class SalesReportFactory extends ReportFactory {
-  createReport(): Report {
-    throw new Error('Method not implemented.');
+  override createReport(): Report {
+    return new SalesReport();
   }
 }
 
 class InventoryReportFactory extends ReportFactory {
-  createReport(): Report {
-    throw new Error('Method not implemented.');
+  override createReport(): Report {
+    return new InventoryReport();
+  }
+}
+
+class BenchmarkReportFactory extends ReportFactory {
+  override createReport(): Report {
+    return new BenchmarkReport();
   }
 }
 
@@ -75,16 +89,23 @@ function main() {
   let reportFactory: ReportFactory;
 
   const reportType = prompt(
-    '¿Qué tipo de reporte deseas? %c(sales/inventory)',
-    COLORS.red
-  );
+    `¿Qué tipo de reporte deseas? (sales/inventory/benchmark):`
+  ).toLowerCase();
 
-  if (reportType === 'sales') {
-    reportFactory = new SalesReportFactory();
-  } else {
-    reportFactory = new InventoryReportFactory();
+  switch(reportType){
+    case 'sales':
+      reportFactory = new SalesReportFactory();
+      break;
+    case 'inventory':
+      reportFactory = new InventoryReportFactory();
+      break;
+    case 'benchmark':
+      reportFactory = new BenchmarkReportFactory();
+      break;
+    default:
+      throw new Error('Invalid option');
+      break;
   }
-
   reportFactory.generateReport();
 }
 

@@ -38,7 +38,7 @@ class BeaconBurger implements Hamburger {
 }
 
 abstract class Restaurant {
-    abstract createHamburger() : Hamburger;
+    protected abstract createHamburger() : Hamburger;
 
     orderHamburger():void {
         const hamburger = this.createHamburger();
@@ -80,7 +80,6 @@ function main() {
             break;
         default:
             throw new Error("Invalid order type");
-            return;
     }
 
     restaurant.orderHamburger();
