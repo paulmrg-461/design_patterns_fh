@@ -76,3 +76,17 @@ class FastFoodRestaurantFactory implements RestaurantFactory {
     return new Beer();
   }
 }
+
+function main (factory: RestaurantFactory) {
+  const hamburger = factory.createHamburger();
+  const drink = factory.serveDrink();
+
+  hamburger.prepare();
+  drink.serve();
+}
+
+console.log('\n%cVeggie order:', COLORS.green)
+main(new VeggieRestaurantFactory() );
+
+console.log('\n%cFastFood order:', COLORS.red)
+main(new FastFoodRestaurantFactory() );
